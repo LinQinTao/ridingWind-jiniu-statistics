@@ -13,3 +13,40 @@
 npm install --save ridingWind-jiniu-statistics
 ```
 
+二. 使用
+
+1、签到
+
+# 参数说明：
+
+```js
+ * apiUrl：  String    接口地址  （ default：http://api.test.jiniutech.cn ）
+ * appid：   String    产品id   （ default：'' ）
+ * channel： String    渠道     （ default：'official' ）
+```
+
+```js
+import { jnSignin } from 'ridingWind-jiniu-statistics';
+
+jnSignin({ apiUrl, appid, channel })
+```
+
+2、事件埋点
+
+# 参数说明：
+
+```js
+ * apiUrl：  String    接口地址                        （ default：http://api.test.jiniutech.cn ）
+ * appid：   String    产品id                         （ default：'' ）
+ * channel： String    渠道                           （ default：'official' ）
+ * type：    Number    事件类型（1: 计数， 2: 键值）     （ default：1 ）
+ * name：    String    事件名                         （ default：'' ）
+ * value：   String    事件值（键值事件才需要）          （ default：'' ）
+```
+
+```js
+import { jnEvent } from 'ridingWind-jiniu-statistics';
+
+jnEvent({ apiUrl, appid, channel, .... })
+```
+

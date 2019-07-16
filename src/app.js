@@ -1,3 +1,4 @@
+import 'url-search-params-polyfill';
 import axios from 'axios';
 
 function checkStatus(response) {
@@ -34,14 +35,13 @@ function request(options) {
  * 签到
  * apiUrl：  String    接口地址  （ default：http://api.test.jiniutech.cn ）
  * appid：   String    产品id   （ default：'' ）
- * channel： String    渠道     （ default：官方渠道 ）
+ * channel： String    渠道     （ default：'official' ）
 */
 export const jnSignin = (obj = {}) => {
   const {
     apiUrl = 'http://api.test.jiniutech.cn',
     appid = '',
-    // channel = '官方渠道',
-    channel = 'channel1',
+    channel = 'official',
   } = obj;
   const today = new Date();
   const todayYear = today.getFullYear();
@@ -87,7 +87,7 @@ export const jnSignin = (obj = {}) => {
  * 事件埋点
  * apiUrl：  String    接口地址                        （ default：http://api.test.jiniutech.cn ）
  * appid：   String    产品id                         （ default：'' ）
- * channel： String    渠道                           （ default：官方渠道 ）
+ * channel： String    渠道                           （ default：'official' ）
  * type：    Number    事件类型（1: 计数， 2: 键值）     （ default：1 ）
  * name：    String    事件名                         （ default：'' ）
  * value：   String    事件值（键值事件才需要）          （ default：'' ）
@@ -96,8 +96,7 @@ export const jnEvent = (obj = {}) => {
   const {
     apiUrl = 'http://api.test.jiniutech.cn',
     appid = '',
-    // channel = '官方渠道',
-    channel = 'channel1',
+    channel = 'official',
     type = 1,
     name = '',
     value = '',
@@ -119,7 +118,7 @@ export const jnEvent = (obj = {}) => {
     if (!e.data.data) {
       const uuidRidingWind = e.data;
       // 执行埋点的方法
-      const { data: { success, result } } = await request({
+      await request({
         url: `${apiUrl}/statistics-service/statistics/event`,
         method: 'POST',
         data: Object.assign({
@@ -130,7 +129,6 @@ export const jnEvent = (obj = {}) => {
           uuid: uuidRidingWind,
         }, parames),
       });
-      console.log(success, result);
     }
   }, false);
 };

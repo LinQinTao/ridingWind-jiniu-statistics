@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   entry: [
@@ -24,14 +24,14 @@ module.exports = {
         exclude: path.resolve(__dirname, 'node_modules'),
         include: path.resolve(__dirname, 'src'),
         query:{
-          presets:['latest','stage-0', 'react']
+          presets:['latest']
         }
       },
     ],
   },
   externals: {
-    react: 'umd react',
-    'react-dom': 'umd react-dom',
+    axios: 'umd axios',
+    'url-search-params-polyfill': 'umd url-search-params-polyfill',
   },
   resolve: {
     modules: [
@@ -46,7 +46,7 @@ module.exports = {
         warnings: false,
       },
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
   devtool: 'source-map',
 };

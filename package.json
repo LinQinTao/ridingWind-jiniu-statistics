@@ -1,7 +1,7 @@
 {
   "name": "ridingWind-jiniu-statistics",
   "version": "0.0.1",
-  "description": "base components for jiniu",
+  "description": "statistics for jiniu",
   "main": "index.js",
   "scripts": {
     "build": "rimraf lib & webpack --config webpack.prod.config.js"
@@ -37,6 +37,7 @@
     "webpack-bundle-analyzer": "^3.0.3"
   },
   "dependencies": {
-    "axios": "^0.19.0"
+    "axios": "^0.19.0",
+    "url-search-params-polyfill": "^2.0.1"
   }
 }
