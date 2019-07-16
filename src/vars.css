@@ -1,0 +1,96 @@
+:root {
+  --theme: #5984FE;
+  --theme-light: #FF953F;
+  --grey: #666;
+  --grey-lighter: #999;
+  --grey-lightest: #eee;
+  --grey-title: #cbcbcb;
+  --grey-bg: #f8f8f8;
+  --color: #444;
+  --down: #28AD58;
+  --up: #FA3C3C;
+  --border-color: #f1f1f1;
+  --border-color-b: #454755;
+  --black-bg: #262939;
+  --black-color-g: #999;
+  --black-bg-g: #2B2E3F;
+  --gold: #D4B382;
+  --gold-color: #9B8462;
+
+  --flex-center: {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  --valuation-triangle: {
+    position: absolute;
+    display: block;
+    content: '';
+    right: calc(-20 / 32 * 1rem);
+    width: calc(13.2 / 32 * 1rem);
+    height: calc(7 / 32 * 1rem);
+    border-style: solid;
+    border-width: calc(7 / 32 * 1rem);
+  }
+
+  --flex-between: {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  --ellipsis: {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  --arrow-up: {
+    width: calc(20 / 28 * 1em);
+    height: calc(20 / 28 * 1em);
+    color: var(--grey-lighter);
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-bottom-width: calc(1 / 28 * 1em);
+    border-right-width: calc(1 / 28 * 1em);
+    border-bottom-color: var(--grey-lighter);
+    border-right-color: var(--grey-lighter);
+    transform: rotate(225deg);
+  }
+
+  --arrow-down: {
+    width: calc(20 / 28 * 1em);
+    height: calc(20 / 28 * 1em);
+    color: var(--grey-lighter);
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-bottom-width: calc(1 / 28 * 1em);
+    border-right-width: calc(1 / 28 * 1em);
+    border-bottom-color: var(--grey-lighter);
+    border-right-color: var(--grey-lighter);
+    transform: rotate(45deg);
+  }
+
+  --round: {
+    display: inline-block;
+    width: calc(30 / 28 * 1em);
+    height: calc(30 / 28 * 1em);
+    border-style: solid;
+    border-width: calc(1 / 28 * 1em);
+    border-radius: 50%;
+  }
+
+  --unstyle-list: {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  --pos-center: {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

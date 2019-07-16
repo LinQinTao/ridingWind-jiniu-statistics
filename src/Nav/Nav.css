@@ -1,0 +1,13 @@
+@import '../vars.css';
+
+.nav {
+  @apply --flex-center;
+
+  font-size: 1rem;
+  background-color: #fff;
+}
+
+.nav-item {
+  flex-grow: 1;
+  @apply --flex-center;
+}
