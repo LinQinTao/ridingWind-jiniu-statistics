@@ -10,7 +10,7 @@
 一. 安装
 
 ```sh
-npm install --save ridingWind-jiniu-statistics
+npm install --save ridingwind-jiniu-statistics
 ```
 
 二. 使用
@@ -26,7 +26,7 @@ npm install --save ridingWind-jiniu-statistics
 ```
 
 ```js
-import { jnSignin } from 'ridingWind-jiniu-statistics';
+import { jnSignin } from 'ridingwind-jiniu-statistics';
 
 jnSignin({ apiUrl, appid, channel })
 ```
@@ -45,7 +45,7 @@ jnSignin({ apiUrl, appid, channel })
 ```
 
 ```js
-import { jnEvent } from 'ridingWind-jiniu-statistics';
+import { jnEvent } from 'ridingwind-jiniu-statistics';
 
 jnEvent({ apiUrl, appid, channel, .... })
 ```
