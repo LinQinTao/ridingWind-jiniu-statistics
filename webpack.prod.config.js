@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: 'app.min.js',
-    library: 'ridingwind-jiniu-base',
+    library: 'ridingWind-jiniu-statistics',
     libraryTarget: 'umd',
     publicPath: '/',
   },
@@ -27,19 +27,6 @@ module.exports = {
           presets:['latest','stage-0', 'react']
         }
       },
-
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader?minimize&importLoaders=1&module&camelCase&localIdentName=[hash:base64:5]!postcss-loader',
-      },
-      {
-        test: /\.(ico|jpg|jpeg|png|gif|svg)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 100000,
-          name: 'images/[name].[hash:6].[ext]',
-        },
-      },
     ],
   },
   externals: {
@@ -51,7 +38,7 @@ module.exports = {
       path.resolve(__dirname, 'src'),
       'node_modules',
     ],
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js'],
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
