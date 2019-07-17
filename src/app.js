@@ -1,6 +1,8 @@
 import 'url-search-params-polyfill';
 import axios from 'axios';
 
+const srcStr = 'http://media.jiniutech.com/html/jn-uuid/index.html';
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -51,19 +53,23 @@ export const jnSignin = (obj = {}) => {
   const appidDate = +window.localStorage.getItem(`RidingWind${appid}`);
 
   if (date > appidDate) {
-    const iframe = document.createElement('iframe');
-    const srcStr = 'http://media.jiniutech.com/html/jn-uuid/index.html';
-    iframe.src = srcStr;
-    iframe.style.display = 'none';
-    iframe.setAttribute('frameborder', '0');
-    document.body.appendChild(iframe);
+    if (!document.getElementById(`iframe-${appid}`)) {
+      const iframe = document.createElement('iframe');
+      iframe.src = srcStr;
+      iframe.style.display = 'none';
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('id', `iframe-${appid}`);
+      document.body.appendChild(iframe);
+    } else {
+      window.frames[0].postMessage('getUUID', srcStr);
+    }
 
     window.onload = () => {
       window.frames[0].postMessage('getUUID', srcStr);
     };
     window.addEventListener('message', async (e) => {
-      if (!e.data.data) {
-        const uuidRidingWind = e.data;
+      if (e.data.localUUIDRidingWind) {
+        const uuidRidingWind = e.data.localUUIDRidingWind;
         // 执行埋点的方法
         const { data: { success } } = await request({
           url: `${apiUrl}/statistics-service/statistics/signin`,
@@ -104,19 +110,24 @@ export const jnEvent = (obj = {}) => {
 
   const parames = type === 1 ? {} : { value };
 
-  const iframe = document.createElement('iframe');
-  const srcStr = 'http://media.jiniutech.com/html/jn-uuid/index.html';
-  iframe.src = srcStr;
-  iframe.style.display = 'none';
-  iframe.setAttribute('frameborder', '0');
-  document.body.appendChild(iframe);
+  if (!document.getElementById(`iframe-${appid}`)) {
+    const iframe = document.createElement('iframe');
+    iframe.src = srcStr;
+    iframe.style.display = 'none';
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('id', `iframe-${appid}`);
+    document.body.appendChild(iframe);
+  } else {
+    window.frames[0].postMessage('getUUID', srcStr);
+  }
 
   window.onload = () => {
     window.frames[0].postMessage('getUUID', srcStr);
   };
+
   window.addEventListener('message', async (e) => {
-    if (!e.data.data) {
-      const uuidRidingWind = e.data;
+    if (e.data.localUUIDRidingWind) {
+      const uuidRidingWind = e.data.localUUIDRidingWind;
       // 执行埋点的方法
       await request({
         url: `${apiUrl}/statistics-service/statistics/event`,
