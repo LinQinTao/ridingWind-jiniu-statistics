@@ -1,6 +1,6 @@
 # [ridingWind-jiniu-statistics](https://gitee.com/LinQinTao/ridingWind-jiniu-statistics.git)
 
-# 当前版本 0.0.2
+# 当前版本 0.0.3
 
 # 简介
 1. 绩牛统计埋点

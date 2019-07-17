@@ -1,6 +1,6 @@
 {
   "name": "ridingwind-jiniu-statistics",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "statistics for jiniu",
   "main": "index.js",
   "scripts": {
