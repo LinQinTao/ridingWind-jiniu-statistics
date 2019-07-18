@@ -45,6 +45,7 @@ export const jnSignin = (obj = {}) => {
     appid = '',
     channel = 'official',
   } = obj;
+  let aloneLoad = true;
   const today = new Date();
   const todayYear = today.getFullYear();
   const todayMonth = (today.getMonth() + 1) < 10 ? `0${today.getMonth() + 1}` : `${today.getMonth() + 1}`;
@@ -60,29 +61,32 @@ export const jnSignin = (obj = {}) => {
       iframe.setAttribute('frameborder', '0');
       iframe.setAttribute('id', `iframe-${appid}`);
       document.body.appendChild(iframe);
+      setTimeout(() => {
+        window.frames[0].postMessage('getUUID', srcStr);
+      }, 800);
     } else {
       window.frames[0].postMessage('getUUID', srcStr);
     }
 
-    window.onload = () => {
-      window.frames[0].postMessage('getUUID', srcStr);
-    };
     window.addEventListener('message', async (e) => {
       if (e.data.localUUIDRidingWind) {
         const uuidRidingWind = e.data.localUUIDRidingWind;
         // 执行埋点的方法
-        const { data: { success } } = await request({
-          url: `${apiUrl}/statistics-service/statistics/signin`,
-          method: 'POST',
-          data: {
-            appid,
-            channel,
-            uuid: uuidRidingWind,
-          },
-        });
+        if (aloneLoad) {
+          aloneLoad = false;
+          const { data: { success } } = await request({
+            url: `${apiUrl}/statistics-service/statistics/signin`,
+            method: 'POST',
+            data: {
+              appid,
+              channel,
+              uuid: uuidRidingWind,
+            },
+          });
 
-        if (success) {
-          window.localStorage.setItem(`RidingWind${appid}`, date);
+          if (success) {
+            window.localStorage.setItem(`RidingWind${appid}`, date);
+          }
         }
       }
     }, false);
@@ -108,6 +112,7 @@ export const jnEvent = (obj = {}) => {
     value = '',
   } = obj;
 
+  let aloneLoad = true;
   const parames = type === 1 ? {} : { value };
 
   if (!document.getElementById(`iframe-${appid}`)) {
@@ -117,29 +122,32 @@ export const jnEvent = (obj = {}) => {
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('id', `iframe-${appid}`);
     document.body.appendChild(iframe);
+
+    setTimeout(() => {
+      window.frames[0].postMessage('getUUID', srcStr);
+    }, 800);
   } else {
     window.frames[0].postMessage('getUUID', srcStr);
   }
-
-  window.onload = () => {
-    window.frames[0].postMessage('getUUID', srcStr);
-  };
 
   window.addEventListener('message', async (e) => {
     if (e.data.localUUIDRidingWind) {
       const uuidRidingWind = e.data.localUUIDRidingWind;
       // 执行埋点的方法
-      await request({
-        url: `${apiUrl}/statistics-service/statistics/event`,
-        method: 'POST',
-        data: Object.assign({
-          appid,
-          channel,
-          type,
-          name,
-          uuid: uuidRidingWind,
-        }, parames),
-      });
+      if (aloneLoad) {
+        aloneLoad = false;
+        await request({
+          url: `${apiUrl}/statistics-service/statistics/event`,
+          method: 'POST',
+          data: Object.assign({
+            appid,
+            channel,
+            type,
+            name,
+            uuid: uuidRidingWind,
+          }, parames),
+        });
+      }
     }
   }, false);
 };
